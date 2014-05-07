@@ -36,7 +36,7 @@ for (var i = 1; i <= 10; i++)
 }
 ```
 
-In the code above, we need the apiUrl for the PredictionIO instance (e.g. http://127.0.0.1:8000) and the application key generated for the item recomenndation engine.
+In the code above, we need the apiUrl for the PredictionIO instance (e.g. http://127.0.0.1:8000) and the application key generated for the item recommendation engine.
 
 Since Sensible.PredictionIO.NET is based on [RestSharp], all requests follow the same philosophy: a Builder is first created from the corresponging class after passing the appropriate arguments. Then a RestClient is build with a .Build() method, and the response is returned after executing the .Execute() method. Of course, all our requests can be easily converted to asynchronous, just by using RestSharp's .ExecuteAsync()!
 
