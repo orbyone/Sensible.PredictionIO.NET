@@ -125,7 +125,8 @@ The only external dependency for this project is [RestSharp], available on nuget
 Roadmap
 -------
 * support for start time/end time item attributes
-* support custom attributes for items
+* support for item rating
+* support for custom attributes for items
 
 
 
