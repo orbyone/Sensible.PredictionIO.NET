@@ -14,7 +14,7 @@ This repo is maintained by Themos Piperakis from [Sensible].
 
 Quick start
 ----------
-You will need to have access to an instance of PredictionIO, either locally (e.g. via a vagrant VM), or online (e.g. AWS AMI). For installation instructions have a look the the [PredictionIO] website.
+You will need to have access to an instance of PredictionIO, either locally (e.g. via a vagrant VM), or online (e.g. AWS AMI). For installation instructions have a look at the [PredictionIO] website.
 
 After you setup the PredictionIO server, you will first need to create an application through the admin panel. Make note of the application key generated. After that, create an item recommendation engine with the default algorithm (kNN), and name it itemrec. 
 
