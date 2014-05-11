@@ -23,6 +23,8 @@ namespace Sensible.PredictionIO.NET
         
         public string Action { get; set; }
 
+        public int Rate { get; set; }
+
         public List<double> Coordinates { get; set; }
     }
 }

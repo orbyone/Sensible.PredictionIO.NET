@@ -26,6 +26,10 @@ namespace Sensible.PredictionIO.NET
             RestRequest.AddParameter("pio_action", _userAction.Action);
             RestRequest.AddParameter("pio_uid", _userAction.UserId);
             RestRequest.AddParameter("pio_iid", _userAction.ItemId);
+            if (_userAction.Action == UserAction.Actions.Rate && _userAction.Rate >= 1 && _userAction.Rate <= 5)
+            {
+                RestRequest.AddParameter("pio_rate", _userAction.Rate);
+            }
             if (_userAction.Coordinates != null && _userAction.Coordinates.Count == 2)
             {
                 RestRequest.AddParameter("pio_latlng", string.Format("{0},{1}", _userAction.Coordinates[0].ToString(CultureInfo.InvariantCulture), _userAction.Coordinates[1].ToString(CultureInfo.InvariantCulture)));
