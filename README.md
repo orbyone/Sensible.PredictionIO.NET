@@ -1,7 +1,7 @@
 Sensible.PredictionIO.NET
 =========================
 Sensible.PredictionIO.NET is an open source C# wrapper for the [PredictionIO] API. If you are not already familiar 
-with PredictionIO, it is an "open source machine learning server for software developers to create predictive features, such as personalization, recommendation and content discovery". It is an amazing machine learning software which stands on the shoulder of giants such as Apache Mahout and MongoDB, and allows you to add features to your application such as:
+with PredictionIO, it is an "open source machine learning server for software developers to create predictive features, such as personalization, recommendation and content discovery". It is an amazing machine learning software which stands on the shoulders of giants such as Apache Mahout and MongoDB, and allows you to add features to your application such as:
 
 * predict user behaviors
 * offer personalized video, news, deals, ads and job openings
@@ -14,7 +14,7 @@ This repo is maintained by Themos Piperakis from [Sensible].
 
 Quick start
 ----------
-You will need to have access to an instance of PredictionIO, either locally (e.g. via a vagrant VM), or online (e.g. AWS AMI). For installation instructions have a look the the [PredictionIO] website.
+You will need to have access to an instance of PredictionIO, either locally (e.g. via a vagrant VM), or online (e.g. AWS AMI). For installation instructions have a look at the [PredictionIO] website.
 
 After you setup the PredictionIO server, you will first need to create an application through the admin panel. Make note of the application key generated. After that, create an item recommendation engine with the default algorithm (kNN), and name it itemrec. 
 
@@ -36,7 +36,7 @@ for (var i = 1; i <= 10; i++)
 }
 ```
 
-In the code above, we need the apiUrl for the PredictionIO instance (e.g. http://127.0.0.1:8000) and the application key generated for the item recomenndation engine.
+In the code above, we need the apiUrl for the PredictionIO instance (e.g. http://127.0.0.1:8000) and the application key generated for the item recommendation engine.
 
 Since Sensible.PredictionIO.NET is based on [RestSharp], all requests follow the same philosophy: a Builder is first created from the corresponging class after passing the appropriate arguments. Then a RestClient is build with a .Build() method, and the response is returned after executing the .Execute() method. Of course, all our requests can be easily converted to asynchronous, just by using RestSharp's .ExecuteAsync()!
 
@@ -125,7 +125,8 @@ The only external dependency for this project is [RestSharp], available on nuget
 Roadmap
 -------
 * support for start time/end time item attributes
-* support custom attributes for items
+* support for item rating
+* support for custom attributes for items
 
 
 
