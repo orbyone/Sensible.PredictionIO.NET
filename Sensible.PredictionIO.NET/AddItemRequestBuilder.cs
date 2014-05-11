@@ -33,6 +33,14 @@ namespace Sensible.PredictionIO.NET
             RestRequest.AddParameter("pio_inactive", _item.Inactive.ToString().ToLower());
             RestRequest.AddParameter("pio_price", _item.Price.ToString(CultureInfo.InvariantCulture));
             RestRequest.AddParameter("pio_profit", _item.Profit.ToString(CultureInfo.InvariantCulture));
+            if (_item.StartTime > DateTime.MinValue)
+            {
+                RestRequest.AddParameter("pio_startT", _item.StartTimeSeconds);
+            }
+            if (_item.EndTime > DateTime.MinValue)
+            {
+                RestRequest.AddParameter("pio_endT", _item.EndTimeSeconds);
+            }
             return client;
         }
     }
