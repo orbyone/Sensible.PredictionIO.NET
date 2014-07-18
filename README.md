@@ -12,6 +12,13 @@ Sensible.PredictionIO.NET supports PredictionIO version 0.7.0, but should be com
 
 This repo is maintained by Themos Piperakis from [Sensible].
 
+Installation
+------------
+You may easily install the latest version of Sensible.PredictionIO.NET from the nuget command line by issuing the following command:
+```
+Install-Package Sensible.PredictionIO.NET
+```
+
 Quick start
 ----------
 You will need to have access to an instance of PredictionIO, either locally (e.g. via a vagrant VM), or online (e.g. AWS AMI). For installation instructions have a look at the [PredictionIO] website.
