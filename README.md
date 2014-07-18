@@ -122,10 +122,15 @@ The only external dependency for this project is [RestSharp], available on nuget
 > Install-Package RestSharp
 ```
 
+Changelog
+---------
+* 1.1: 
+ * Added support for start/end time
+ * Added support for item rating
+* 1.0: Initial release
+
 Roadmap
 -------
-* support for start time/end time item attributes
-* support for item rating
 * support for custom attributes for items
 
 
