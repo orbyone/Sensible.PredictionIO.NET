@@ -85,7 +85,7 @@ namespace Sensible.PredictionIO.NET.Clients
             var response = (JObject)Execute(Constants.EngineResource, Method.POST, body);
             if (response[Constants.IsOriginal].Value<bool>())
             {
-                return null;
+                return new List<ItemRecommendation>();
             }
             var recommendations = new List<ItemRecommendation>();
             foreach (var item in response[Constants.Items])
@@ -120,7 +120,7 @@ namespace Sensible.PredictionIO.NET.Clients
             var response = (JObject) (await ExecuteAsync(Constants.EngineResource, Method.POST, body));
             if (response[Constants.IsOriginal].Value<bool>())
             {
-                return null;
+                return new List<ItemRecommendation>();
             }
             var recommendations = new List<ItemRecommendation>();
             foreach (var item in response[Constants.Items])
