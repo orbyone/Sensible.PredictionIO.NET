@@ -23,10 +23,10 @@ Generating our sample data
 
 You will then need to feed the EventServer with some sample data. There are two main concepts in PredictIO: users, and items. Let's first create 10 users for our sample application:
 ```
-var client = new EventClient(ConfigurationManager.AppSettings["eventUrl"], ConfigurationManager.AppSettings["appId"]);
+var eventClient = new EventClient(ConfigurationManager.AppSettings["eventUrl"], ConfigurationManager.AppSettings["appId"]);
 for (var i = 1; i <= 10; i++)
 {
-    var eventId = client.SetUser(i.ToString());
+    var eventId = eventClient.SetUser(i.ToString());
     Console.WriteLine(string.Format("User {0} created, event id {1}", i.ToString(), eventId));
 }
 ```
@@ -41,87 +41,65 @@ After our users are generated, we now need to add some items. Items have one or 
 ```
 for (var i = 1; i <= 50; i++)
 {
-    var eventId = client.SetItem(i.ToString());
-    Console.WriteLine(string.Format("User {0} created, event id {1}", i.ToString(), eventId));
+    var eventId = eventClient.SetItem(i.ToString(), new[] { "1" });
+    Console.WriteLine(string.Format("Item {0} created, event id {1}", i.ToString(), eventId));
 }
 ```
 
-The last step to generate our sample data is to enter some user actions. A user action represents actions such as like, dislike, rate, etc. We are generating 10 random item actions for our users.
+The last step to generate our sample data is to enter some user actions. A user action represents actions such as like, dislike, rate, etc. .
 
 ```
 for (var i = 1; i <= 10; i++)
 {
     for (var j = 1; j <= 10; j++)
     {
-        var item = new Random().Next(1, 51);
-        var builder = client.UserActionRequestBuilder(
-            new UserAction
-            {
-                UserId = i.ToString(),
-                ItemId = item.ToString(),
-                Action = UserAction.Actions.View
-            }
-            );
-        var request = builder.Build();
-        var response = request.Execute(builder.RestRequest);
-        if (response.StatusCode == HttpStatusCode.Created)
-        {
-            Console.WriteLine(string.Format("User {0} viewed item {1}", i.ToString(), item.ToString()));
-        }
+        eventClient.SetActionItem(i.ToString(), j.ToString(), "like");
     }
 }
 ```
 
-Our data is now ready. At this point, our model needs to be trained before being able to generate recommendations. By default PredictionIO is setup to train the model every hour, but you can force a manual training through the admin panel. Please refer to [PredictionIO] documentation for further details.
+Alternatively, you may also rate items if your algorithm supports it. In a vanilla PredictionIO installation, you will need to set booleanData to false in algorithms.json, in order to supply a numeric rating for the action.
+
+```
+for (var i = 1; i <= 10; i++)
+{
+    for (var j = 1; j <= 10; j++)
+    {
+        var rating = new Random().Next(1, 6);
+        eventClient.RateItem(i.ToString(), j.ToString(), rating);
+    }
+}
+```
+
+Our data is now ready. At this point, our model needs to be trained before being able to generate recommendations. Please refer to [PredictionIO] documentation for further details.
 
 Generating a recommendation
 ---------------------------
 
-When you see that the engine in in Running status, it's time to generate our first user recommendation. Let's get 10 recommended items for user 1.
+When you have successfully deployed the engine, it's time to generate our first user recommendation. Let's get 10 recommended items for user 1.
 
 ```
-var builder = client.ItemRecGetTopNRequestBuilder(
-    new RecommendationEngineRequest
-    {
-        UserId = "1",
-        Engine = "itemrec",
-        NumberOfItems = 10,
-    });
-var request = builder.Build();
-var response = request.Execute<EngineResponse>(builder.RestRequest);
-if (response.StatusCode == HttpStatusCode.OK)
-{
-    Console.WriteLine("Recommended items for user 1 are: " + string.Join(", ", response.Data.ItemIds));
-}
-else
-{
-    Console.WriteLine("An error occured. " + response.Content);
-}
+var engineClient = new EventClient(ConfigurationManager.AppSettings["engineUrl"]);
+var recommendations = engineClient.GetItemRecommendations("1", 5);
 ```
 
-If everything goes as planned, PredictionIO will generate 10 recommended items for our user! Amazing, wasn't it?!
+If everything goes as planned, PredictionIO will generate 5 recommended items for our user, along with a prediction score! Amazing, wasn't it?!
 
 
 Dependencies
 ------------
-The only external dependency for this project is [RestSharp], available on nuget via this command:
+The only external dependencies for this project are [RestSharp] and [Newtonsoft.Json], available on nuget via this command:
 ```
 > Install-Package RestSharp
+> Install-Package Newtonsoft.Json
 ```
 
 Changelog
 ---------
-* 1.1: 
- * Added support for start/end time
- * Added support for item rating
 * 1.0: Initial release
-
-Roadmap
--------
-* support for custom attributes for items
-
 
 
 [PredictionIO]:http://prediction.io
 [Sensible]:http://www.sensible.gr
 [RestSharp]:http://restsharp.org
+[Newtonsoft.Json]:http://james.newtonking.com/json
