@@ -76,7 +76,7 @@ Our data is now ready. At this point, our model needs to be trained before being
 Generating a recommendation
 ---------------------------
 
-When you have successfully deployed the engine, it's time to generate our first user recommendation. Let's get 10 recommended items for user 1.
+When you have successfully deployed the engine, it's time to generate our first user recommendation. Let's get 5 recommended items for user 1.
 
 ```
 var engineClient = new EventClient(ConfigurationManager.AppSettings["engineUrl"]);
