@@ -24,7 +24,9 @@ namespace Sensible.PredictionIO.NET
         public const string ItemTypes = "pio_itypes";
         public const string Rating = "pio_rating";
         public const string UserId = "uid";
+        public const string ItemIds = "iids";
         public const string Items = "items";
+        public const string IsOriginal = "isOriginal";
         public const string MaxNumberOfItems = "n";
         public const string Status = "status";
         public const string Properties = "properties";
