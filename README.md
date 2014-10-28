@@ -1,4 +1,4 @@
-This branch is for the older PredictionIO 0.7 version
+_This branch is for the older PredictionIO 0.7 version_
 
 Sensible.PredictionIO.NET
 =========================
