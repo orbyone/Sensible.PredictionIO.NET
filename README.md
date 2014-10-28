@@ -1,3 +1,5 @@
+This branch is for the older PredictionIO 0.7 version
+
 Sensible.PredictionIO.NET
 =========================
 Sensible.PredictionIO.NET is an open source C# wrapper for the [PredictionIO] API. If you are not already familiar 
