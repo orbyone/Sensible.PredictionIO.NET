@@ -1,7 +1,7 @@
 Sensible.PredictionIO.NET
 =========================
 Sensible.PredictionIO.NET is an open source C# wrapper for the [PredictionIO]. If you are not already familiar 
-with PredictionIO, it is an "open source machine learning server for software developers to create predictive features, such as personalization, recommendation and content discovery". It is an amazing machine learning software which stands on the shoulders of giants such as Apache Mahout and MongoDB, and allows you to add features to your application such as:
+with PredictionIO, it is an "open source machine learning server for software developers to create predictive features, such as personalization, recommendation and content discovery". It is an amazing machine learning software which stands on the shoulders of giants such as Apache Hadoop and Elasticsearch, and allows you to add features to your application such as:
 
 * predict user behaviors
 * offer personalized video, news, deals, ads and job openings
