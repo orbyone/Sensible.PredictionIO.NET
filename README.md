@@ -85,6 +85,9 @@ var recommendations = engineClient.GetItemRecommendations("1", 5);
 
 In the code above, we need the eventUrl for the PredictionIO engine instance (e.g. http://127.0.0.1:8000). If everything goes as planned, PredictionIO will generate 5 recommended items for our user, along with a prediction score! Amazing, wasn't it?!
 
+Generating item rankings
+------------------------
+
 The library also supports the item ranking algorithm. All you have to do is call the GetItemRankings method, passing the user id and a string array of item ids you want ranking for. If the method returns an empty list, this implies PredictionIO was not able to compute ranking for these items
 
 ```
