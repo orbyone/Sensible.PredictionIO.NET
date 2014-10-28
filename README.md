@@ -83,7 +83,7 @@ var engineClient = new EventClient(ConfigurationManager.AppSettings["engineUrl"]
 var recommendations = engineClient.GetItemRecommendations("1", 5);
 ```
 
-If everything goes as planned, PredictionIO will generate 5 recommended items for our user, along with a prediction score! Amazing, wasn't it?!
+In the code above, we need the eventUrl for the PredictionIO engine instance (e.g. http://127.0.0.1:8000). If everything goes as planned, PredictionIO will generate 5 recommended items for our user, along with a prediction score! Amazing, wasn't it?!
 
 
 Dependencies
