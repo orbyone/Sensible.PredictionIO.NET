@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -8,16 +9,22 @@ namespace Sensible.PredictionIO.NET.Clients
     public abstract class BaseClient
     {
         public string ApiUrl { get; protected set; }
+
+        public string AccessKey { get; private set; }
+
         protected RestClient RestClient;
-        protected BaseClient(string apiUrl)
+
+        protected BaseClient(string apiUrl, string accessKey)
         {
-            ApiUrl = apiUrl;
-            RestClient = new RestClient(apiUrl);
+            ApiUrl      = apiUrl;
+            AccessKey   = accessKey;
+            RestClient  = new RestClient(apiUrl);
+            RestClient.Timeout = Constants.ClientTimeoutMS;
         }
 
         protected JToken Execute(string resource, Method method, object body)
         {
-            var request = new RestRequest(resource);
+            var request = new RestRequest(appendAccessKey(resource));
             request.Method = method;
             if (body != null)
             {
@@ -41,8 +48,10 @@ namespace Sensible.PredictionIO.NET.Clients
         
         protected async Task<JToken> ExecuteAsync(string resource, Method method, object body)
         {
-            var request = new RestRequest(resource);
+            var request = new RestRequest(appendAccessKey(resource));
             request.Method = method;
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json; charset=UTF-8");
             if (body != null)
             {
                 request.AddParameter(Constants.ApplicationJsonContentType, body, ParameterType.RequestBody);
@@ -59,7 +68,7 @@ namespace Sensible.PredictionIO.NET.Clients
                     tcs.TrySetResult(response);
                 }
             });
-            var content = (await tcs.Task).Content;
+            var content = (await tcs.Task.ConfigureAwait(false)).Content;
             if (string.IsNullOrWhiteSpace(content))
             {
                 return null;
@@ -73,6 +82,21 @@ namespace Sensible.PredictionIO.NET.Clients
             {
                 throw new Exception(content);
             }
+        }
+
+        private string appendAccessKey(string resource)
+        {   
+            if (AccessKey == null)
+            {
+                throw new ArgumentException("Access Key is NULL");
+            }
+
+            var builder = new StringBuilder(resource);
+            builder.Append('?');
+            builder.Append(Constants.AccessKey);
+            builder.Append('=');
+            builder.Append(AccessKey);
+            return builder.ToString();
         }
     }
 }

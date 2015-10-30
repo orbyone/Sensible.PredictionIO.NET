@@ -8,6 +8,7 @@ namespace Sensible.PredictionIO.NET
 {
     public class Constants
     {
+        public const int ClientTimeoutMS = 5000;
         public const string RootResource = "/";
         public const string EventsResource = "/events.json";
         public const string EngineResource = "/queries.json";
@@ -19,10 +20,10 @@ namespace Sensible.PredictionIO.NET
         public const string SetEvent = "$set";
         public const string UnsetEvent = "$unset";
         public const string DeleteEvent = "$delete";
-        public const string Item = "pio_item";
-        public const string User = "pio_user";
-        public const string ItemTypes = "pio_itypes";
-        public const string Rating = "pio_rating";
+        public const string Item = "item";
+        public const string User = "user";
+        public const string ItemTypes = "itypes";
+        public const string Rating = "rating";
         public const string UserId = "uid";
         public const string ItemIds = "iids";
         public const string Items = "items";
@@ -33,6 +34,7 @@ namespace Sensible.PredictionIO.NET
         public const string EventTime = "eventTime";
         public const string Alive = "alive";
         public const string AppId = "appId";
+        public const string AccessKey = "accessKey";
         public const string Event = "event";
         public const string ApplicationJsonContentType = "application/json";
 

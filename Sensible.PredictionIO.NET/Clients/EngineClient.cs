@@ -13,8 +13,8 @@ namespace Sensible.PredictionIO.NET.Clients
     public class EngineClient : BaseClient
     {
 
-        public EngineClient(string apiUrl)
-            : base(apiUrl)
+        public EngineClient(string apiUrl, string accessKey)
+            : base(apiUrl, accessKey)
         {
         }
 
