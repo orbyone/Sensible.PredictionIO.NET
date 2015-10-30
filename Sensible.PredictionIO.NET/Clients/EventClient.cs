@@ -13,8 +13,8 @@ namespace Sensible.PredictionIO.NET.Clients
     {
         public int AppId { get; private set; }
 
-        public EventClient(string eventUrl, int appId)
-            : base(eventUrl)
+        public EventClient(string eventUrl, int appId, string accessKey)
+            : base(eventUrl, accessKey)
         {
             ApiUrl = eventUrl;
             AppId = appId;
@@ -52,7 +52,7 @@ namespace Sensible.PredictionIO.NET.Clients
         {
             var request = new Event(AppId, Constants.SetEvent, userId, Constants.User, null, null, properties);
             var body = request.ToString(Formatting.None);
-            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body);
+            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body).ConfigureAwait(false);
             return response[Constants.EventId].Value<string>();
         }
 
@@ -64,7 +64,7 @@ namespace Sensible.PredictionIO.NET.Clients
             }
             var request = new Event(AppId, Constants.UnsetEvent, userId, Constants.User, null, null, properties);
             var body = request.ToString(Formatting.None);
-            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body);
+            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body).ConfigureAwait(false);
             return response[Constants.EventId].Value<string>();
         }
 
@@ -126,7 +126,7 @@ namespace Sensible.PredictionIO.NET.Clients
             }
             var request = new Event(AppId, Constants.SetEvent, itemId, Constants.Item, null, null, properties);
             var body = request.ToString(Formatting.None);
-            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body);
+            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body).ConfigureAwait(false);
             return response[Constants.EventId].Value<string>();
         }
 
@@ -138,7 +138,7 @@ namespace Sensible.PredictionIO.NET.Clients
             }
             var request = new Event(AppId, Constants.UnsetEvent, itemId, Constants.Item, null, null, properties);
             var body = request.ToString(Formatting.None);
-            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body);
+            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body).ConfigureAwait(false);
             return response[Constants.EventId].Value<string>();
         }
 
@@ -164,7 +164,7 @@ namespace Sensible.PredictionIO.NET.Clients
             }
             var request = new Event(AppId, action, userId, Constants.User, itemId, Constants.Item, properties);
             var body = request.ToString(Formatting.None);
-            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body);
+            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body).ConfigureAwait(false);
             return response[Constants.EventId].Value<string>();
         }
 
@@ -175,7 +175,7 @@ namespace Sensible.PredictionIO.NET.Clients
 
         public async Task<string> RateItemAsync(string userId, string itemId, int rating)
         {
-            return await SetActionItemAsync(userId, itemId, Constants.Actions.Rate, rating);
+            return await SetActionItemAsync(userId, itemId, Constants.Actions.Rate, rating).ConfigureAwait(false);
         }
 
         public string DeleteItem(string itemId)
@@ -190,7 +190,7 @@ namespace Sensible.PredictionIO.NET.Clients
         {
             var request = new Event(AppId, Constants.DeleteEvent, itemId, Constants.Item, null, null, null);
             var body = request.ToString(Formatting.None);
-            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body);
+            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body).ConfigureAwait(false);
             return response[Constants.EventId].Value<string>();
         }
         
@@ -206,7 +206,7 @@ namespace Sensible.PredictionIO.NET.Clients
         {
             var request = new Event(AppId, Constants.DeleteEvent, userId, Constants.User, null, null, null);
             var body = request.ToString(Formatting.None);
-            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body);
+            var response = await ExecuteAsync(Constants.EventsResource, Method.POST, body).ConfigureAwait(false);
             return response[Constants.EventId].Value<string>();
         }
     }
